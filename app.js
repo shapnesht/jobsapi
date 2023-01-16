@@ -7,7 +7,7 @@ const app = express();
 const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
-const rateLimit = require("rate-limiter");
+const rateLimiter = require('express-rate-limit');
 
 // connectDB
 const connectDB = require("./db/connect");
@@ -23,11 +23,11 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 // Authentication Handler for Jobs API
 const authenticationHandler = require("./middleware/authentication");
 
-app.set("trust proxy", 1);
+app.set('trust proxy', 1);
 app.use(
   rateLimiter({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
   })
 );
 app.use(express.json());
