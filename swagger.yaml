@@ -1,0 +1,240 @@
+openapi: 3.0.0
+info:
+  title: Jobs API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://jobs-api-wd41.onrender.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterRequest'
+              - example:
+                  name: John
+                  email: shapnesht@gmail.com
+                  password: secret
+            example:
+              name: John
+              email: shapnesht@gmail.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginRequest'
+              - example:
+                  email: shapnesht@gmail.com
+                  password: secret
+            example:
+              email: shapnesht@gmail.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+      - Jobs
+      summary: Create Job
+      operationId: CreateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateJobRequest'
+              - example:
+                  company: Microsoft
+                  position: SDE Intern
+            example:
+              company: Microsoft
+              position: SDE Intern
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Jobs
+      summary: Get All Jobs
+      operationId: GetAllJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+      
+  /user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The user ID
+    get:
+      tags:
+      - Jobs
+      summary: Get Particular Job
+      operationId: GetParticularJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Jobs
+      summary: Update Particular Job
+      operationId: UpdateParticularJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateParticularJobRequest'
+              - example:
+                  company: Zomaatoo
+                  position: SDE Intern
+            example:
+              company: Zomaatoo
+              position: SDE Intern
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Jobs
+      summary: Delete Particular Job
+      operationId: DeleteParticularJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: John
+        email: shapnesht@gmail.com
+        password: secret
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: shapnesht@gmail.com
+        password: secret
+    CreateJobRequest:
+      title: CreateJobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Microsoft
+        position: SDE Intern
+    UpdateParticularJobRequest:
+      title: UpdateParticularJobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Zomaatoo
+        position: SDE Intern
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+  description: ''
+- name: Jobs
+  description: ''
