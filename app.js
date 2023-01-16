@@ -43,7 +43,7 @@ app.use(xss());
 // routes
 
 app.get("/", (req, res) =>
-  res.send("<h1>Jobs API</h1> <a link='/api-docs'>API DOCUMENTATION</a>")
+  res.send("<h1>Jobs API</h1> <a href='/api-docs'>API DOCUMENTATION</a>")
 );
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
